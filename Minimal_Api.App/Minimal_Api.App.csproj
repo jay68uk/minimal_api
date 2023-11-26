@@ -19,4 +19,8 @@
       <None Remove="library.db" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include=".idea\.idea.Minimal_Api.dir\.idea\.gitignore" />
+    </ItemGroup>
+
 </Project>
