@@ -1,0 +1,23 @@
+﻿@rootUrl=https://localhost:7053
+
+GET {{rootUrl}}/basic-get
+
+###
+
+GET {{rootUrl}}/get-with-route-param/21
+
+###
+
+GET {{rootUrl}}/get-with-route-param/xyz
+
+###
+
+GET {{rootUrl}}/get-with-query?id=99
+
+###
+
+GET {{rootUrl}}/get-with-regex/123-12-1234
+
+###
+
+GET {{rootUrl}}/get-with-regex/xyz

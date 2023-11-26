@@ -1,0 +1,52 @@
+﻿@rootUrl=https://localhost:7053
+
+POST {{rootUrl}}/books
+Content-Type: application/json
+
+{
+  "isbn": "978-0-137-08107-3",
+  "title": "The Clean Coder",
+  "author": "Robert C. Martin",
+  "shortDescription": "In The Clean Coder: A Code of Conduct for Professional Programmers, legendary software expert Robert C. Martin introduces the disciplines, techniques, tools, and practices of true software craftsmanship",
+  "pageCount": 242,
+  "releaseDate": "2011-03-13"
+}
+
+###
+
+GET {{rootUrl}}/books/978-0-137-08107-3
+
+###
+
+GET {{rootUrl}}/books/8097897ggg
+
+###
+
+GET {{rootUrl}}/books
+
+###
+
+GET {{rootUrl}}/books?searchterm=code
+
+###
+
+GET {{rootUrl}}/books?searchterm=xyz
+
+###
+
+PUT {{rootUrl}}/books
+Content-Type: application/json
+
+{
+  "isbn": "978-0-137-08107-3",
+  "title": "The Clean Code",
+  "author": "Robert C. Martin",
+  "shortDescription": "In The Clean Code: A Code of Conduct for Professional Programmers, legendary software expert Robert C. Martin introduces the disciplines, techniques, tools, and practices of true software craftsmanship",
+  "pageCount": 242,
+  "releaseDate": "2011-03-13"
+}
+
+###
+
+DELETE {{rootUrl}}/books/978-0-137-08107-3
+#Authorization: SecretKey
