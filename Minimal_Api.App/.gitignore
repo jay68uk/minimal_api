@@ -6,6 +6,7 @@
 /contentModel.xml
 /modules.xml
 /.idea.Minimal_Api.iml
+/.idea
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
