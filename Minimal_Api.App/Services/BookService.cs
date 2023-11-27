@@ -1,8 +1,9 @@
 ﻿using Dapper;
 using Minimal_Api.App.Data;
-using Minimal_Api.App.Services;
+using Minimal_Api.App.Models;
+using Minimal_Api.App.Models.Extensions;
 
-namespace Minimal_Api.App.Models;
+namespace Minimal_Api.App.Services;
 
 public class BookService : IBookService
 {
@@ -112,6 +113,27 @@ public class BookService : IBookService
         return result > 0;
     }
 
+    public async Task<Book?> PartialUpdateAsync(BookPatch bookUpdate)
+    {
+        var connection = await _connectionFactory.CreateConnectionAsync();
+
+        var book = await GetByIsbnAsync(bookUpdate.Isbn);
+        if (book is null)
+        {
+            return null;
+        }
+
+        book.ApplyPatch(bookUpdate);
+        
+        const string sql =
+            "UPDATE books SET title = @Title, author = @Author, short_description = @ShortDescription, page_count = @PageCount, release_date = @ReleaseDate WHERE isbn = @Isbn";
+        var result =
+            await connection.ExecuteAsync(
+                sql, book);
+
+        return book;
+    }
+    
     public async Task<bool> DeleteAsync(string isbn)
     {
         var connection = await _connectionFactory.CreateConnectionAsync();

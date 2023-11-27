@@ -1,0 +1,5 @@
+﻿@rootUrl=https://localhost:7053
+
+PATCH {{rootUrl}}/books?isbn=978-0-137-08107-3&pagecount=300
+
+### 

@@ -29,4 +29,19 @@ internal static class LibraryEndpointsHelpers
 
         return Results.CreatedAtRoute("GetBook", new { isbn = bookModel.Isbn }, bookModel);
     }
+
+    internal static async Task<IResult> PartialUpdateBookAsync(IValidator<BookPatch> validator,  [AsParameters] BookPatch bookModel, IBookService ds)
+    {
+        var validationResult = await validator.ValidateAsync(bookModel);
+
+        if (validationResult.IsValid is false)
+        {
+            return Results.BadRequest(validationResult.Errors);
+        }
+       
+        var bookUpdate = await ds.PartialUpdateAsync(bookModel);
+
+        return bookUpdate is null?  Results.NotFound() : Results.Ok(bookUpdate);
+
+    }
 }

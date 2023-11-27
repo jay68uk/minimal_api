@@ -60,6 +60,12 @@ public class LibraryEndpoints : IEndpoints
             return result? Results.Ok(bookModel): Results.NotFound();
         })
             .WithTags("Books");
+        
+        app.MapMethods("books", new []{"PATCH"}, LibraryEndpointsHelpers.PartialUpdateBookAsync)
+            .WithName("PatchBook")
+            .Produces<Book>(200)
+            .Produces<IEnumerable<ValidationFailure>>(400)
+            .WithTags("Books");
 
         app.MapDelete(@"/books/{isbn}", 
             [Authorize(AuthenticationSchemes = ApiKeySchemeConstants.SchemeName)]
