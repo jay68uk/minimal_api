@@ -3,3 +3,7 @@
 PATCH {{rootUrl}}/books?isbn=978-0-137-08107-3&pagecount=300
 
 ### 
+
+PATCH {{rootUrl}}/books?isbn=978-X-137-08107-3&pagecount=300
+
+### 

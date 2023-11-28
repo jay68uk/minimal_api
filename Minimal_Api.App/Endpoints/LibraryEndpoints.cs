@@ -14,7 +14,7 @@ public class LibraryEndpoints : IEndpoints
     public static void DefineEndpoints(IEndpointRouteBuilder app)
     {
 
-        app.MapPost("books", LibraryEndpointsHelpers.CreateBookAsync)
+        app.MapPost("books", LibraryEndpointsDelegates.CreateBookAsync)
             .WithName("CreateBook")
             .Accepts<Book>("application/json")
             .Produces<Book>(201)
@@ -61,7 +61,8 @@ public class LibraryEndpoints : IEndpoints
         })
             .WithTags("Books");
         
-        app.MapMethods("books", new []{"PATCH"}, LibraryEndpointsHelpers.PartialUpdateBookAsync)
+        app.MapMethods("books", new []{"PATCH"}, LibraryEndpointsDelegates.PartialUpdateBookAsync)
+            .AddEndpointFilter<BookPatchIsValidFilter>()
             .WithName("PatchBook")
             .Produces<Book>(200)
             .Produces<IEnumerable<ValidationFailure>>(400)
@@ -79,5 +80,26 @@ public class LibraryEndpoints : IEndpoints
     public static void AddEndpointServices(IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton<IBookService, BookService>();
+    }
+}
+
+public class BookPatchIsValidFilter : IEndpointFilter
+{
+    private readonly IValidator<BookPatch> _validator;
+
+    public BookPatchIsValidFilter(IValidator<BookPatch> validator)
+    {
+        _validator = validator;
+    }
+    public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
+    {
+        var validationResult = await _validator.ValidateAsync(context.GetArgument<BookPatch>(0));
+
+        if (validationResult.IsValid is false)
+        {
+            return Results.BadRequest(validationResult.Errors);
+        }
+
+        return await next(context);
     }
 }

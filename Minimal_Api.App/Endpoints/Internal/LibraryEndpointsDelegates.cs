@@ -6,7 +6,7 @@ using Minimal_Api.App.Services;
 
 namespace Minimal_Api.App.Endpoints.Internal;
 
-internal static class LibraryEndpointsHelpers
+internal static class LibraryEndpointsDelegates
 {
     internal static async Task<IResult> CreateBookAsync(IValidator<Book> validator, Book bookModel, IBookService ds)
     {
@@ -30,14 +30,14 @@ internal static class LibraryEndpointsHelpers
         return Results.CreatedAtRoute("GetBook", new { isbn = bookModel.Isbn }, bookModel);
     }
 
-    internal static async Task<IResult> PartialUpdateBookAsync(IValidator<BookPatch> validator,  [AsParameters] BookPatch bookModel, IBookService ds)
+    internal static async Task<IResult> PartialUpdateBookAsync([AsParameters] BookPatch bookModel, IBookService ds)
     {
-        var validationResult = await validator.ValidateAsync(bookModel);
-
-        if (validationResult.IsValid is false)
-        {
-            return Results.BadRequest(validationResult.Errors);
-        }
+        // var validationResult = await validator.ValidateAsync(bookModel);
+        //
+        // if (validationResult.IsValid is false)
+        // {
+        //     return Results.BadRequest(validationResult.Errors);
+        // }
        
         var bookUpdate = await ds.PartialUpdateAsync(bookModel);
 
