@@ -49,4 +49,4 @@ Content-Type: application/json
 ###
 
 DELETE {{rootUrl}}/books/978-0-137-08107-3
-#Authorization: SecretKey
+Authorization: SecretKey

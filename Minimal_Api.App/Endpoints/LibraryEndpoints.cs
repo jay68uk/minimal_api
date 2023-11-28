@@ -3,6 +3,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Minimal_Api.App.Auth;
+using Minimal_Api.App.Endpoints.Filters;
 using Minimal_Api.App.Endpoints.Internal;
 using Minimal_Api.App.Models;
 using Minimal_Api.App.Services;
@@ -80,26 +81,5 @@ public class LibraryEndpoints : IEndpoints
     public static void AddEndpointServices(IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton<IBookService, BookService>();
-    }
-}
-
-public class BookPatchIsValidFilter : IEndpointFilter
-{
-    private readonly IValidator<BookPatch> _validator;
-
-    public BookPatchIsValidFilter(IValidator<BookPatch> validator)
-    {
-        _validator = validator;
-    }
-    public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
-    {
-        var validationResult = await _validator.ValidateAsync(context.GetArgument<BookPatch>(0));
-
-        if (validationResult.IsValid is false)
-        {
-            return Results.BadRequest(validationResult.Errors);
-        }
-
-        return await next(context);
     }
 }
