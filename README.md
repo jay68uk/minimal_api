@@ -17,5 +17,5 @@ The endpoints can be accessed via:
 - METHOD
 
 ## Anatomy
-![Minimal API.jpeg](..%2F..%2F..%2FDownloads%2FMinimal%20API.jpeg)
+![Minimal API.jpeg](Minimal%20API.jpeg)
 
