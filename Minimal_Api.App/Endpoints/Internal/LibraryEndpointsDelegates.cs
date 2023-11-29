@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Minimal_Api.App.Auth;
 using Minimal_Api.App.Models;
 using Minimal_Api.App.Services;
 
@@ -30,6 +32,7 @@ internal static class LibraryEndpointsDelegates
         return Results.CreatedAtRoute("GetBook", new { isbn = bookModel.Isbn }, bookModel);
     }
 
+    [Authorize(AuthenticationSchemes = ApiKeySchemeConstants.SchemeName)]
     internal static async Task<IResult> PartialUpdateBookAsync([AsParameters] BookPatch bookModel, IBookService ds)
     {
         // var validationResult = await validator.ValidateAsync(bookModel);

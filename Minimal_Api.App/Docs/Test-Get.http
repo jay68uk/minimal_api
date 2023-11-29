@@ -4,7 +4,19 @@ GET {{rootUrl}}/basic-get
 
 ###
 
-GET {{rootUrl}}/get-with-route-param/21
+GET {{rootUrl}}/get-with-route-param-explicit/21
+
+###
+
+GET {{rootUrl}}/get-with-route-param-explicit/XX
+
+###
+
+GET {{rootUrl}}/get-with-route-param-implicit/99
+
+###
+
+GET {{rootUrl}}/get-with-route-param-implicit/XX
 
 ###
 

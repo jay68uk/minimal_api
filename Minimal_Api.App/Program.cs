@@ -42,7 +42,9 @@ await databaseInitialiser.InitialiseAsync();
 
 app.MapGet("/basic-get", () => "Very basic GET");
 
-app.MapGet("get-with-route-param/{id:int}", (int id) => $"GET with route parameter {id}");
+app.MapGet("get-with-route-param-explicit/{id:int}", (int id) => $"GET with route parameter {id}");
+
+app.MapGet("get-with-route-param-implicit/{id}", (int id) => $"GET with route parameter {id}");
 
 app.MapGet("get-with-query", (int id) => $"GET with query string {id}");
 
