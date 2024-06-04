@@ -21,12 +21,8 @@ steps:
 - task: XplatGenerateReleaseNotes@4
   inputs:
     outputfile: 'C:\Users\zshap\Documents\ReleaseNotes\releasenotes.md'
-    templateLocation: 'InLine'
-    inlinetemplate: '## Build {{buildDetails.buildNumber}}
-* **Branch**: {{buildDetails.sourceBranch}}
-* **Tags**: {{buildDetails.tags}}
-* **Completed**: {{buildDetails.finishTime}}
-* **Previous Build**: {{compareBuildDetails.buildNumber}}'
+    templateLocation: 'File'
+    templatefile: 'ReleaseNotesTemplate.md'
     dumpPayloadToConsole: false
     dumpPayloadToFile: false
     replaceFile: false
