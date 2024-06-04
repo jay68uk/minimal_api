@@ -30,7 +30,7 @@ steps:
     dumpPayloadToConsole: false
     dumpPayloadToFile: false
     replaceFile: false
-    appendtofile: true
+    appendtofile: false
     getParentsAndChildren: False
     getAllParents: False
     getIndirectPullRequests: False
