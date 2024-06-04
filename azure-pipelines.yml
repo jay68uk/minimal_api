@@ -20,7 +20,7 @@ steps:
 
 - task: XplatGenerateReleaseNotes@4
   inputs:
-    outputfile: '$(Build.ArtifactStagingDirectory)\releasenotes.md'
+    outputfile: 'C:\Users\zshap\Documents\ReleaseNotes\releasenotes.md'
     templateLocation: 'InLine'
     inlinetemplate: '## Build {{buildDetails.buildNumber}}
 * **Branch**: {{buildDetails.sourceBranch}}
