@@ -22,7 +22,11 @@ steps:
   inputs:
     outputfile: 'release_notes.md'
     templateLocation: 'InLine'
-    inlinetemplate: '###Heading'
+    inlinetemplate: '## Build {{buildDetails.buildNumber}}
+* **Branch**: {{buildDetails.sourceBranch}}
+* **Tags**: {{buildDetails.tags}}
+* **Completed**: {{buildDetails.finishTime}}
+* **Previous Build**: {{compareBuildDetails.buildNumber}}'
     dumpPayloadToConsole: false
     dumpPayloadToFile: false
     replaceFile: true
