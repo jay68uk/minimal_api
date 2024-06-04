@@ -29,7 +29,7 @@ steps:
 * **Previous Build**: {{compareBuildDetails.buildNumber}}'
     dumpPayloadToConsole: false
     dumpPayloadToFile: false
-    replaceFile: true
+    replaceFile: false
     getParentsAndChildren: False
     getAllParents: False
     getIndirectPullRequests: False
