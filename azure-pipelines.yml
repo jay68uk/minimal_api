@@ -17,3 +17,19 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- task: XplatGenerateReleaseNotes@4
+  inputs:
+    outputfile: 'release_notes.md'
+    templateLocation: 'InLine'
+    inlinetemplate: '###Heading'
+    dumpPayloadToConsole: false
+    dumpPayloadToFile: false
+    replaceFile: true
+    getParentsAndChildren: False
+    getAllParents: False
+    getIndirectPullRequests: False
+    stopOnError: False
+    considerPartiallySuccessfulReleases: False
+    checkForManuallyLinkedWI: False
+    wiqlFromTarget: 'WorkItems'
