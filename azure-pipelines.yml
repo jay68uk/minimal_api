@@ -20,7 +20,7 @@ steps:
 
 - task: XplatGenerateReleaseNotes@4
   inputs:
-    outputfile: 'C:\Users\zshap\Documents\ReleaseNotes\releasenotes.md'
+    outputfile: '$(Build.ArtifactStagingDirectory)\releasenotes.md'
     templateLocation: 'File'
     templatefile: 'ReleaseNotesTemplate.md'
     dumpPayloadToConsole: false
@@ -34,3 +34,17 @@ steps:
     considerPartiallySuccessfulReleases: False
     checkForManuallyLinkedWI: False
     wiqlFromTarget: 'WorkItems'
+    bitbucketSecret: 
+
+- task: WikiUpdaterTask@3
+  inputs:
+    repo: 'https://AngryTroll@dev.azure.com/AngryTroll/BlazorDemo/_git/BlazorDemo.wiki'
+    filename: 'Release Notes'
+    replaceFile: True
+    dataIsFile: true
+    sourceFile: '$(Build.ArtifactStagingDirectory)\releasenotes.md'
+    message: 'release note update'
+    gitname: 'release'
+    gitemail: 'jay.gilesuk68@gmail.com'
+    localpath: '$(System.DefaultWorkingDirectory)\repo'
+    RetryMode: 'Pull'
