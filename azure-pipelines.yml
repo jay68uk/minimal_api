@@ -40,7 +40,7 @@ steps:
   inputs:
     repo: 'https://AngryTroll@dev.azure.com/AngryTroll/BlazorDemo/_git/BlazorDemo.wiki'
     filename: 'Release Notes'
-    replaceFile: True
+    replaceFile: false
     dataIsFile: true
     sourceFile: '$(Build.ArtifactStagingDirectory)\releasenotes.md'
     message: 'release note update'
@@ -48,3 +48,6 @@ steps:
     gitemail: 'jay.gilesuk68@gmail.com'
     localpath: '$(System.DefaultWorkingDirectory)\repo'
     RetryMode: 'Pull'
+    appendToFile: true
+    useAgentToken: true
+
